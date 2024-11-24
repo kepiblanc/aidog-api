@@ -1,0 +1,23 @@
+# Use a specific version of node rather than a broad tag
+FROM --platform=linux/amd64 node:20.0.0-slim
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Optionally, add a .dockerignore file to exclude files and directories that shouldn't trigger a rebuild.
+
+# Copy all relevant files to a temporary directory
+COPY . /tmp/app/
+
+# Calculate checksum of all copied files and use it to control cache
+RUN sha256sum /tmp/app/* | sha256sum > /tmp/checksum.txt && \
+    cp -a /tmp/app/. /usr/src/app/ && \
+    rm -rf /tmp/app
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of your application code
+COPY . .
+
+CMD [ "npm", "start" ]
