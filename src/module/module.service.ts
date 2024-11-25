@@ -128,7 +128,7 @@ export default class ModuleService {
       totalAllocated: allocation?.totalAllocated || 0,
       referralBonus: allocation?.referralBonus || 0,
       noOfReferrals: allocation?.noOfReferrals || 0,
-      referralLink: `https://aidogs.meme/${allocation?.referralCode}`,
+      referralLink: `https://aidogs.meme/airdrop/${allocation?.referralCode}`,
       defaults: {
         ...this.defaults,
         reservedAllocation: grossAllocation?.[0]?.total || 0,
